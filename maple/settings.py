@@ -14,8 +14,6 @@ from pathlib import Path
 
 import os, environ
 
-from django.conf.global_settings import STATIC_ROOT, STATICFILES_DIRS
-
 env = environ.Env(
     DEBUG = (bool, False)
 )

@@ -12,11 +12,15 @@
             <div>
                 <input type="text" name="hello_world_input">
             </div>
-            <input type="submit" class="btn btn-primary" value="POST">
+            <div>
+                <input type="submit" class="btn btn-primary" value="POST">
+            </div>
         </form>
 
         {% if hello_world_output %}
-        <h1>{{ hello_world_output.text }}</h1>
+        <h4>
+            {{ hello_world_output.text }}
+        </h4>
         {% endif %}
 
     </div>
