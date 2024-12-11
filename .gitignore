@@ -83,3 +83,5 @@ fabric.properties
 db.sqlite3
 
 .idea/
+
+__pycache__/
