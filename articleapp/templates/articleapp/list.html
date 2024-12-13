@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+  .container div {
+    width: 250px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+  }
+
+  .container img{
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+</style>
+
+  <div class="container">
+    <div class="item1">
+      <img src="https://picsum.photos/200/330">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/340">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/260">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/400">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/510">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/360">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/220">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/250">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/210">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/440">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/320">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/290">
+    </div>
+    <div>
+      <img src="https://picsum.photos/200/420">
+    </div>
+  </div>
+
+  <script src="{% static 'js/magicgrid.js' %}"></script>
+
+{% endblock %}
