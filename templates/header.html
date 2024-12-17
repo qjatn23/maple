@@ -2,24 +2,25 @@
         <div>
             <h1 class="maple_logo">Maple</h1>
         </div>
-        <div>
-             <a href="{% url 'articleapp:list' %}">
+        <div class="maple_header_navbar">
+            <a href="{% url 'articleapp:list' %}" class="maple_header_nav">
                 <span>Articles</span>
             </a>
-            <span>nav2</span>
-            <span>nav3</span>
+            <a href="{% url 'projectapp:list' %}" class="maple_header_nav">
+                <span>Projects</span>
+            </a>
             {% if not user.is_authenticated %}
-            <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
+            <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="maple_header_nav">
                 <span>login</span>
             </a>
-            <a href="{% url 'accountapp:create' %}">
+            <a href="{% url 'accountapp:create' %}" class="maple_header_nav">
                 <span>SignUp</span>
             </a>
             {% else %}
-            <a href="{% url 'accountapp:detail' pk=user.pk %}">
+            <a href="{% url 'accountapp:detail' pk=user.pk %}" class="maple_header_nav">
                 <span>MyPage</span>
             </a>
-            <form action="{% url 'accountapp:logout' %}" method="post">
+            <form action="{% url 'accountapp:logout' %}" method="post" class="maple_header_nav">
             {% csrf_token %}
             <button type="submit">
                 <span>logout</span>
