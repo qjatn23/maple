@@ -13,6 +13,8 @@ from django.views.generic.list import MultipleObjectMixin
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from articleapp.models import Article
+from projectapp.models import Project
+from subscribeapp.models import Subscription
 
 has_ownership = [account_ownership_required, login_required]
 
@@ -35,8 +37,21 @@ class AccountDetailView(DetailView, MultipleObjectMixin):
     paginate_by =  12
 
     def get_context_data(self, **kwargs):
+        # 게시글 목록
         object_list = Article.objects.filter(writer=self.get_object())
-        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
+
+        # 게시글 수
+        article_count = object_list.count()
+
+        # 구독 중 프로젝트 수
+        subscriptions_count = Subscription.objects.filter(user=self.get_object()).count()
+
+        # 추가 데이터 포함
+        context = super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        context['article_count'] = article_count
+        context['subscriptions_count'] = subscriptions_count
+
+        return context
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')

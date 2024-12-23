@@ -10,6 +10,7 @@ from projectapp.models import Project
 class Subscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscription')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='subscription')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('user', 'project')
