@@ -3,29 +3,74 @@
 
 {% block content %}
 <style>
+ /* 카드 전체 스타일 */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 250px; /* 카드 최대 너비 */
+}
 
-  .container {
-    padding: 0;
-    margin: 0 auto;
-  }
+/* 카드 이미지 스타일 */
+.card-img {
+    width: 100%; /* 이미지가 카드 너비에 맞게 */
+}
 
-  .container a {
-    width: 45%;
-    max-width: 250px;
-  }
-
-  .container div {
+/* 카드 하단 좋아요 및 댓글 영역 */
+.card-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 1rem;
-  }
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    font-size: 1rem;
+    width: 40%; /* 카드 하단 전체 너비 */
+}
 
-  .container img{
+/* 아이콘 스타일 */
+.card-footer i {
+    margin-right: 0.3rem;
+    font-size: 1.2rem;
+}
+
+/* 좋아요/댓글 숫자 스타일 */
+.card-footer span {
+    margin-right: 1rem;
+    color: #555;
+}
+
+/* 전체 컨테이너 스타일 */
+.container {
+    padding: 0;
+    margin: 0 auto;
+}
+
+/* 카드 링크 스타일 */
+.container a {
     width: 100%;
-    border-radius: 1rem;
-  }
+    max-width: 250px; /* 카드 크기 제한 */
+}
 
+/* 카드 내부의 이미지 컨테이너 스타일 */
+.container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem; /* 둥근 모서리 */
+}
+
+/* 컨테이너 내 이미지 스타일 */
+.container img {
+    width: 100%; /* 이미지가 컨테이너 크기에 맞도록 */
+    border-radius: 1rem; /* 둥근 모서리 */
+}
 </style>
 
   {% if article_list %}
@@ -39,7 +84,7 @@
   <script src="{% static 'js/magicgrid.js' %}"></script>
   {% else %}
   <div class="text-center">
-    <h1>No Articles YET!</h1>
+    <h1>아직 게시글이 없습니다</h1>
   </div>
   {% endif %}
 
@@ -47,7 +92,7 @@
 
   <div style="text-align: center">
     <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-3">
-      Create Article
+      게시글 작성
     </a>
   </div>
 

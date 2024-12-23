@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -17,15 +19,20 @@ has_ownership = [account_ownership_required, login_required]
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('accountapp:login')
+    success_url = reverse_lazy('home')
     template_name = 'accountapp/create.html'
+
+    def form_valid(self, form):
+        self.object = form.save()
+        login(self.request, self.object)
+        return HttpResponseRedirect(self.get_success_url())
 
 class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
 
-    paginate_by =  25
+    paginate_by =  12
 
     def get_context_data(self, **kwargs):
         object_list = Article.objects.filter(writer=self.get_object())

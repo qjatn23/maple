@@ -51,7 +51,10 @@ MIDDLEWARE = [
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
-    messages.SUCCESS: 'primary'
+    messages.SUCCESS: 'primary',
+    messages.DEBUG: 'warning',
+    messages.INFO: 'danger',
+    messages.WARNING: 'warning',
 }
 
 ROOT_URLCONF = 'maple.urls'
@@ -95,9 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

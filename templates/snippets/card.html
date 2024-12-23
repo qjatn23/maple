@@ -1,3 +1,14 @@
-<div>
-  <img src="{{ article.image.url }}">
+<div class="card">
+  <a href="{% url 'articleapp:detail' pk=article.pk %}">
+    <!-- 이미지 -->
+    <img src="{{ article.image.url }}" class="card-img" alt="게시글 이미지">
+
+    <!-- 하트와 댓글 -->
+    <div class="card-footer">
+      <a href="{% url 'likeapp:article_like' pk=article.pk %}">
+        <i class="material-icons" style="vertical-align: middle; color: #f77;">favorite</i>
+      </a>
+      <span style="vertical-align: middle; font-family: 'MaruBuriBold'">{{ article.like }}</span>
+    </div>
+  </a>
 </div>
