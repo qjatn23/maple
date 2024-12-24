@@ -13,7 +13,7 @@ class Comment(models.Model):
 
     content = models.TextField(null=False)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         # 유효성 검사: 내용이 비어 있지 않은지 확인
