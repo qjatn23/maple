@@ -9,6 +9,12 @@
         <i class="material-icons" style="vertical-align: middle; color: #f77;">favorite</i>
       </a>
       <span style="vertical-align: middle; font-family: 'MaruBuriBold'">{{ article.like }}</span>
+      <a href="{% url 'articleapp:detail' pk=article.pk %}">
+        <i class="material-icons" style="vertical-align: middle; color: #666;">chat</i>
+      </a>
+      <span style="vertical-align: middle; font-family: 'MaruBuriBold'; margin-left: 5px;">
+        {{ article.comment_count }}
+      </span>
     </div>
   </a>
 </div>

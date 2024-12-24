@@ -8,6 +8,7 @@ from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
+from commentapp.models import Comment
 
 
 # Create your views here.
@@ -57,3 +58,10 @@ class ArticleListView(ListView):
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
     paginate_by = 8
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        articles = context['article_list']
+        for article in articles:
+            article.comment_count = Comment.objects.filter(article=article).count()  # 댓글 개수 추가
+        return context

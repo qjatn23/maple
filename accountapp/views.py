@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -13,6 +14,7 @@ from django.views.generic.list import MultipleObjectMixin
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from articleapp.models import Article
+from commentapp.models import Comment
 from projectapp.models import Project
 from subscribeapp.models import Subscription
 
@@ -39,6 +41,10 @@ class AccountDetailView(DetailView, MultipleObjectMixin):
     def get_context_data(self, **kwargs):
         # 게시글 목록
         object_list = Article.objects.filter(writer=self.get_object())
+
+        # 댓글 갯수 추가 (기존 방식)
+        for article in object_list:
+            article.comment_count = Comment.objects.filter(article=article).count()
 
         # 게시글 수
         article_count = object_list.count()

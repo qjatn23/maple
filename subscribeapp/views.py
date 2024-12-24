@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import RedirectView, ListView
 
 from articleapp.models import Article
+from commentapp.models import Comment
 from projectapp.models import Project
 from subscribeapp.models import Subscription
 
@@ -35,9 +36,22 @@ class SubscriptionListView(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'subscribeapp/list.html'
-    paginate_by = 5
+    paginate_by = 8
 
     def get_queryset(self):
         projects = Subscription.objects.filter(user=self.request.user).values_list('project')
         article_list = Article.objects.filter(project__in=projects)
         return article_list
+
+    def get_context_data(self, **kwargs):
+        # 기본 context 데이터 가져오기
+        context = super().get_context_data(**kwargs)
+        articles = context['article_list']
+
+        # 각 게시글에 댓글 갯수 추가
+        for article in articles:
+            article.comment_count = Comment.objects.filter(article=article).count()
+
+        # 수정된 게시글 리스트를 다시 context에 추가
+        context['article_list'] = articles
+        return context

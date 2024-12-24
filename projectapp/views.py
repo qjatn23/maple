@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 
 from articleapp.models import Article
+from commentapp.models import Comment
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
 from subscribeapp.models import Subscription
@@ -35,10 +36,18 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
             subscription = Subscription.objects.filter(user=user, project=project)
         else:
             subscription = None
+
         object_list = Article.objects.filter(project=self.get_object())
-        return super(ProjectDetailView, self).get_context_data(object_list=object_list,
-                                                               subscription=subscription,
-                                                               **kwargs)
+
+        # 각 게시글에 댓글 갯수 추가
+        for article in object_list:
+            article.comment_count = Comment.objects.filter(article=article).count()
+
+        # context에 게시글 리스트와 추가 데이터 포함
+        context = super(ProjectDetailView, self).get_context_data(object_list=object_list,
+                                                                  subscription=subscription,
+                                                                  **kwargs)
+        return context
 
 
 class ProjectListView(ListView):
