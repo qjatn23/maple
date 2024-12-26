@@ -2,6 +2,55 @@
 
 {% block content %}
 
+<style>
+/* 공통 버튼 스타일 */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 수정 버튼 스타일 */
+.btn-update {
+    background-color: #fff;
+    color: black;
+    border: 2px solid black;
+}
+
+.btn-update:hover {
+    background-color: #6c63ff;
+    color: #fff;
+    box-shadow: 0 8px 15px rgba(108, 99, 255, 0.3);
+}
+
+/* 삭제 버튼 스타일 */
+.btn-delete {
+    background-color: #ff6b6b;
+    color: #black;
+    border: 2px solid black;
+}
+
+.btn-delete:hover {
+    background-color: #e25656; /* 더 짙은 빨간색 */
+    box-shadow: 0 8px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* 버튼 크기 조정 */
+.col-3 {
+    min-width: 120px; /* 버튼 최소 너비 */
+    max-width: 160px;
+}
+</style>
+
+
+
   <div style="text-align: center; max-width: 700px; margin: 4rem auto">
     <div>
 
@@ -33,11 +82,11 @@
 
         {% if target_article.writer == user %}
         <a href="{% url 'articleapp:update' pk=target_article.pk %}"
-        class="btn btn-primary rounded-pill col-3">
+        class="btn btn-update col-3">
             수정
         </a>
         <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
-        class="btn btn-danger rounded-pill col-3">
+        class="btn btn-delete col-3">
             삭제
         </a>
         {% endif %}
